@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Optics</title>
+<title>Grainline Studio</title>
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -22,6 +22,7 @@
     ================================================== -->
 <link rel="stylesheet" type="text/css"  href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="js/modernizr.custom.js"></script>
@@ -103,21 +104,21 @@
     </div>
     <div class="space"></div>
     <div class="row">
-      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-desktop"></i>
+      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-draw-polygon"></i>
         <h4>Grading/Plotting</h4>
-        <p>Comming soon</p>
+        <p>Our CAD pattern cutters/ Graders can digitize your pattern and grade it by Standard Grading Rules (each size grow with the same grade) or Special Grading Rules (every 2 sizes are growing with the same grade or your own Grading Table). For quick costing check under <a href="#works-section" class="page-scroll">Pricing</a></li>. We can convert your patterns to various formats. We can read Gerber, DFX, ASTM/AAMA, TIIP, DGS files. We can digitize TIFF and Jpeg files (makes sure the sizes are 1:1 ratio).</p>
       </div>
-      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-gears"></i>
+      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-edit"></i>
         <h4>Technical Package</h4>
-        <p>Comming soon</p>
+        <p>We can create a complete technical package consisting a detailed a Technical drawing (Front and Back), a Makeup sheet, a Grading sheet, a Fitting sheet, a Trimming sheet, a Marker Plan, a Costing sheet. You don’t the full package? No problem! We can create a tailored Technical Package for you, and it will cost less.</p>
       </div>
-      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-pie-chart"></i>
+      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-cut"></i>
         <h4>Pattern Cutting</h4>
-        <p>Comming soon</p>
+        <p>Need a Pattern Cutter, having trouble sampling your collection or just running out of time? We can create your patterns on a computer, and you can have it in a CAD format, being plotted on Paper or on Card (please note paper won’t be cut. It will save you time if you need to digitize or grade your patterns for later). You need to alter a pattern? No problem! Just send it to us, we digitize it and make it 0.01cm accurate. (notches might vary) </p>
       </div>
-      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-line-chart"></i>
+      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-tshirt"></i>
         <h4>Sampling</h4>
-        <p>Comming soon</p>
+        <p>We are able to sample your prototype from a cheap mock-up material or create a collection from your chosen fabric. Our garment technologist can attend to fitting sessions and we can organise a model if needed. From leather to lace, swimsuit to underwear, outerwear to bespoke there is no limit.</p>
       </div>
     </div>
     <div class="space"></div>
@@ -152,6 +153,7 @@
               <tr>
                 <th>Garment types:</th>
                 <th>Number of pieces:</th>
+                <th>Sizes:</th>
                 <th>Plot and cut on card?</th>
                 <th>Pricing:</th>
               </tr>
@@ -160,6 +162,7 @@
               <tr>
                   <td data-bind="text: name"></td>
                   <td><input data-bind="value: quantity" type="number" name="quantity" min="0" max="100" step="1" ></td>
+                  <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" ></td>
                   <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
                   <td>Price:
                     <span>£</span><span data-bind="text: price"></span>
@@ -180,6 +183,7 @@
             <tr>
               <th>Garment types:</th>
               <th>Number of pieces:</th>
+              <th>Sizes</th>
               <th>Plot and cut on card?</th>
               <th>Pricing:</th>
             </tr>
@@ -188,6 +192,7 @@
             <tr>
                 <td data-bind="text: name"></td>
                 <td><input data-bind="value: quantity" type="number" name="quantity" min="0" max="100" step="1" ></td>
+                <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" ></td>
                 <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
                 <td>Price:
                   <span>£</span><span data-bind="text: price"></span>
@@ -220,7 +225,7 @@
       <p><i class="fa fa-map-marker"></i>20-24 Assembly Passage <br>
         London, E1 4UT</p>
       <div class="space"></div>
-      <p><i class="fa fa-envelope-o"></i>info@grainlinestudio.co.uk</p>
+      <p><i class="far fa-envelope"></i></i>info@grainlinestudio.co.uk</p>
       <div class="space"></div>
       <p><i class="fa fa-phone"></i>+44 2077908395</p>
     </div>
@@ -255,19 +260,18 @@
   <div class="container">
     <div class="social">
       <ul>
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-        <li><a href="#"><i class="fa fa-github"></i></a></li>
-        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+        <li><a href="#"><i class="fab fa-github"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
       </ul>
     </div>
   </div>
 </div>
 <div id="footer">
   <div class="container">
-    <p>Copyright &copy; Optics. Designed by <a href="http://www.templatewire.com" rel="nofollow">TemplateWire</a></p>
   </div>
 </div>
 
