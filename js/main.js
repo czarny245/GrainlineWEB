@@ -4,26 +4,30 @@
     ================================================ */
     var pricingTypes = [
         {
+            id: 0,
             name: "Trousers, shorts and skirts:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 7.5, 9.5, 11.5, 11.5, 11.5 ],
             plot: false,
         },
-        {
+        {   
+            id:  1,
             name: "Blousers, tops and shirts:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 7.5, 9.5, 13, 13, 13 ],
             plot: false,
         },
-        {
+        {   
+            id: 2,
             name: "Dresses and playsuits:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 9, 12, 14.85, 18.50, 22.50 ],
             plot: false,
         },
-        {
+        {   
+            id: 3,
             name: "Jackets and Coats:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 9.5, 12.5, 16, 24, 22.5 ],
             plot: false,
         }
@@ -31,25 +35,25 @@
     var specPricingTypes = [
         {
             name: "Trousers, shorts and skirts:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 8.5, 11.5, 13.5, 13.5, 13.5 ],
             plot: false,
         },
         {
             name: "Blousers, tops and shirts:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 8.5, 11.5, 15, 15, 15 ],
             plot: false,
         },
         {
             name: "Dresses and playsuits:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 10.5, 13, 15.5, 21.5, 24.5 ],
             plot: false,
         },
         {
             name: "Jackets and Coats:",
-            quantity: 0,
+            quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 11, 13.5, 17, 27, 25 ],
             plot: false,
         }
@@ -62,16 +66,20 @@
     var StandardPricing = function(data) {
         var self = this
 
+        self.priceRange = data.price
+        self.id = data.id
         self.plotValue = ko.observable();
+        self.sizes = ko.observable(4);
         self.name = data.name;
-        self.quantity = ko.observable(0);
+        self.quantity = ko.observableArray(data.quantity);
+        self.quantityValue = ko.observable();
         self.initialPricePP = ko.computed(function() {
-            if (self.quantity() === 0){return 0}
-            else if (self.quantity() > 0 && self.quantity() < 7){return data.price[0]}
-            else if (self.quantity() > 6 && self.quantity() < 12){return data.price[1]}
-            else if (self.quantity() > 11 && self.quantity() < 19){return data.price[2]}
-            else if (self.quantity() > 18 && self.quantity() < 31){return data.price[3]}
-            else if (self.quantity() > 30 ){return data.price[4]}
+            if (self.quantityValue() === 0){return 0}
+            else if (self.quantityValue() === "1 to 6"){return data.price[0]}
+            else if (self.quantityValue() === "7 to 11"){return data.price[1]}
+            else if (self.quantityValue() === "12 to 18"){return data.price[2]}
+            else if (self.quantityValue() === "19 to 30"){return data.price[3]}
+            else if (self.quantityValue() === "31 to 40"){return data.price[4]}
         });
         self.pricePP = ko.computed(function() {
             if (self.plotValue() === "Yes"){return self.initialPricePP() + 4}
@@ -79,7 +87,7 @@
         });
         self.plotOptions = ko.observableArray(['No', 'Yes']);
         self.price = ko.computed(function() {
-            return self.pricePP() * self.quantity()
+            return self.pricePP() * self.sizes()
         });
     }    
 
@@ -87,15 +95,17 @@
         var self = this
 
         self.plotValue = ko.observable();
+        self.sizes = ko.observable(4);
         self.name = data.name;
-        self.quantity = ko.observable(0);
+        self.quantity = ko.observableArray(data.quantity);
+        self.quantityValue = ko.observable();
         self.initialPricePP = ko.computed(function() {
-            if (self.quantity() === 0){return 0}
-            else if (self.quantity() > 0 && self.quantity() < 7){return data.price[0]}
-            else if (self.quantity() > 6 && self.quantity() < 12){return data.price[1]}
-            else if (self.quantity() > 11 && self.quantity() < 19){return data.price[2]}
-            else if (self.quantity() > 18 && self.quantity() < 31){return data.price[3]}
-            else if (self.quantity() > 30 ){return data.price[4]}
+            if (self.quantityValue() === 0){return 0}
+            else if (self.quantityValue() === "1 to 6"){return data.price[0]}
+            else if (self.quantityValue() === "7 to 11"){return data.price[1]}
+            else if (self.quantityValue() === "12 to 18"){return data.price[2]}
+            else if (self.quantityValue() === "19 to 30"){return data.price[3]}
+            else if (self.quantityValue() === "31 to 40"){return data.price[4]}
         });
         self.pricePP = ko.computed(function() {
             if (self.plotValue() === "Yes"){return self.initialPricePP() + 4}
@@ -103,58 +113,15 @@
         });
         self.plotOptions = ko.observableArray(['No', 'Yes']);
         self.price = ko.computed(function() {
-            return self.pricePP() * self.quantity()
+            return self.pricePP() * self.sizes()
         });
     }
+    
 function main() {
 
 (function () {
     
    'use strict';
-
-
-
-   /* ==============================================
-    Pricing listeners
-    ================================================ */
-    $( "select" )
-        .change(function() {
-            var TSSpiece = $(".TSSpiece")[0].value
-            calculate(TSSpiece);
-        });
-        var plotValue
-
-    $(".piece-amount").change(function() {
-        var TSSpiece = $(".TSSpiece")[0].value
-        console.log(TSSpiece);
-        calculate(TSSpiece);
-        console.log(pricingTypes);
-    });
-
-
-    /* ==============================================
-    Pricing function
-    ================================================ */
-
-    function calculate(TSSpiece) {
-        var price, finalPrice
-        if (TSSpiece < 7){price=7.5}
-        else if (TSSpiece > 6 && TSSpiece < 12){price=9.5}
-        else if (TSSpiece > 11){price=11.5}
-        //if ($(".TSSplot")[0].value === "plot") {
-        //    finalPrice = price * 4;
-        //} else {
-        //    finalPrice = TSSpiece * price;
-        //};
-        finalPrice = TSSpiece*price
-        if ($(".TSSplot")[0].value === "plot"){
-            price = price + 4;
-            finalPrice = TSSpiece*price;
-        }
-        console.log(finalPrice);
-        $(".TSSprice").html("£"+finalPrice + "  (£"+price+" per piece)");
-    };
-    
 
    /* ==============================================
   	Testimonial Slider
@@ -271,5 +238,20 @@ var ViewModel = function() {
             price = price + specPricingList()[i].price()
         }{return price}
     });
+    this.addGarment = function(data) {
+        console.log(data)
+        var object = {
+        id : data.id,
+        name : data.name,
+        quantity : data.quantity(),
+        price : data.priceRange,
+        plot : false}
+
+        console.log(data.id)
+        console.log(data.quantity())
+        self.pricingList.push(new StandardPricing(object));
+        console.log("object added")
+    }
+
 }
 ko.applyBindings(ViewModel);

@@ -151,7 +151,8 @@
       <table>
           <thead>
               <tr>
-                <th>Garment types:</th>
+                <th> </th>
+                <th>Garment type:</th>
                 <th>Number of pieces:</th>
                 <th>Sizes:</th>
                 <th>Plot and cut on card?</th>
@@ -160,9 +161,10 @@
           </thead>
           <tbody data-bind="foreach: pricingList">
               <tr>
+                <td><button data-bind="click: addGarment, attr: {class: id}">+</button></td>
                   <td data-bind="text: name"></td>
-                  <td><input data-bind="value: quantity" type="number" name="quantity" min="0" max="100" step="1" ></td>
-                  <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" ></td>
+                  <td><select data-bind="options: quantity, value: quantityValue"></select></td>
+                  <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
                   <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
                   <td>Price:
                     <span>£</span><span data-bind="text: price"></span>
@@ -181,7 +183,7 @@
       <table>
         <thead>
             <tr>
-              <th>Garment types:</th>
+              <th>Garment type:</th>
               <th>Number of pieces:</th>
               <th>Sizes</th>
               <th>Plot and cut on card?</th>
@@ -191,8 +193,8 @@
         <tbody data-bind="foreach: specPricingList">
             <tr>
                 <td data-bind="text: name"></td>
-                <td><input data-bind="value: quantity" type="number" name="quantity" min="0" max="100" step="1" ></td>
-                <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" ></td>
+                <td><select data-bind="options: quantity, value: quantityValue"></select></td>
+                <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
                 <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
                 <td>Price:
                   <span>£</span><span data-bind="text: price"></span>
