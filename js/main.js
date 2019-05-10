@@ -120,9 +120,6 @@
 function main() {
 
 (function () {
-    
-   'use strict';
-
    /* ==============================================
   	Testimonial Slider
   	=============================================== */ 
@@ -207,51 +204,49 @@ var ViewModel = function() {
     var self = this;
 
         // Initialize the arrays that will hold all our pricing Types objects
-    this.pricingList = ko.observableArray([]);
-    this.specPricingList = ko.observableArray([]);
+    self.pricingList = ko.observableArray([]);
+    self.specPricingList = ko.observableArray([]);
 
     // Push all our pricingTypes object into the array
     pricingTypes.forEach(function(pricingType){
         self.pricingList.push(new StandardPricing(pricingType));
         console.log("filling standard grading list...")
-        console.log(pricingList())
+        console.log(self.pricingList())
     });
 
     // Push all our specPricingTypes object into the array
     specPricingTypes.forEach(function(specPricingType){
         self.specPricingList.push(new SpecialistPricing(specPricingType));
         console.log("filling spec grading list....")
-        console.log(specPricingList())
+        console.log(self.specPricingList())
     });
 
     // Calculate the final price for standard grading
     this.finalPrice = ko.computed(function(){
         var price = 0
-        for (var i = 0; i < pricingList().length; i++) {
-            price = price + pricingList()[i].price()
+        for (var i = 0; i < self.pricingList().length; i++) {
+            price = price + self.pricingList()[i].price()
         }{return price}
     });
     // Calculate the final price for specialist grading
     this.specFinalPrice = ko.computed(function(){
         var price = 0
-        for (var i = 0; i < specPricingList().length; i++) {
-            price = price + specPricingList()[i].price()
+        for (var i = 0; i < self.specPricingList().length; i++) {
+            price = price + self.specPricingList()[i].price()
         }{return price}
     });
-    this.addGarment = function(data) {
+    // Button functions adding items to the pricing lists
+    self.addGarment = function(data) {
         console.log(data)
-        var object = {
-        id : data.id,
-        name : data.name,
-        quantity : data.quantity(),
-        price : data.priceRange,
-        plot : false}
+        self.pricingList.push(data)
+        console.log(self.pricingList())
 
-        console.log(data.id)
-        console.log(data.quantity())
-        self.pricingList.push(new StandardPricing(object));
-        console.log("object added")
     }
+    self.addSpecGarment = function(data) {
+        console.log(data)
+        self.specPricingList.push(data)
+        console.log(self.specPricingList())
 
+    }
 }
-ko.applyBindings(ViewModel);
+ko.applyBindings(new ViewModel());

@@ -161,7 +161,7 @@
           </thead>
           <tbody data-bind="foreach: pricingList">
               <tr>
-                <td><button data-bind="click: addGarment, attr: {class: id}">+</button></td>
+                <td><form><button data-bind="click: $parent.addGarment">+</button></td>
                   <td data-bind="text: name"></td>
                   <td><select data-bind="options: quantity, value: quantityValue"></select></td>
                   <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
@@ -183,6 +183,7 @@
       <table>
         <thead>
             <tr>
+              <th> </th>
               <th>Garment type:</th>
               <th>Number of pieces:</th>
               <th>Sizes</th>
@@ -192,6 +193,7 @@
         </thead>
         <tbody data-bind="foreach: specPricingList">
             <tr>
+                <td><form><button data-bind="click: $parent.addSpecGarment">+</button></td>
                 <td data-bind="text: name"></td>
                 <td><select data-bind="options: quantity, value: quantityValue"></select></td>
                 <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>

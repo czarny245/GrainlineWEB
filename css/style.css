@@ -364,6 +364,12 @@ th {
 td {
 	padding: 10px;
 }
+.standard {
+	display: block;
+}
+.specialist {
+	display: block;
+}
 
 /* Contact Section */
 #contact-section {
