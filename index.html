@@ -133,21 +133,26 @@
       <div class="clearfix"></div>
     </div>
     <div class="categories">
-      <h4>Filters:</h4>
       <ul class="cat">
         <li>
-          <ol class="type">
-            <li><a href="#" data-filter=".standard">Standard Grading</a></li>
-            <li><a href="#" data-filter=".specialist">Specialist Grading</a></li>
+          <ol class="type" style="display: none;">
+            <li><a href="#" data-bind="click: filterTables" data-filter="standard">Standard Grading</a></li>
+            <li><a href="#" data-bind="click: filterTables" data-filter="specialist">Specialist Grading</a></li>
           </ol>
         </li>
       </ul>
       <div class="clearfix"></div>
     </div>
     <div class="row">
-      <div class="portfolio-items">
-      <div class="standard">
-      <h3>Standard pricing table</h3>
+      <div>
+        <div class="table-title">
+          <h4>Standard pricing table<span>
+              <div class="type">
+                <a class="standard" href="#" data-bind="click: filterTables" data-filter="standard">Hide</a>
+              </div>
+            </span></h4>
+          </div>
+      <div data-filter="standard" class="standard-table">
       <table>
           <thead>
               <tr>
@@ -161,7 +166,8 @@
           </thead>
           <tbody data-bind="foreach: pricingList">
               <tr>
-                <td><form><button data-bind="click: $parent.addGarment">+</button></td>
+                <td><i data-bind="click: $parent.addGarment" class="fas fa-plus" id="plus-minus"></i>
+                  <i data-bind="click: $parent.removeGarment" class="fas fa-minus" id="plus-minus"></i></td>
                   <td data-bind="text: name"></td>
                   <td><select data-bind="options: quantity, value: quantityValue"></select></td>
                   <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
@@ -176,14 +182,21 @@
       <div class="final-price">
         <h4>Final Price:</h4><span>£</span><span data-bind="text: finalPrice"></span>
       </div>
+      <div class="space"></div>
     </div>
     <div class="space"></div>
-    <div class="specialist">
-      <h3>Specialist Grading table</h3>
+    <div class="table-title">
+      <h4>Specialist pricing table<span>
+        <div class="type">
+          <a class="specialist" href="#" data-bind="click: filterTables" data-filter="standard">Hide</a>
+        </div>
+      </span></h3>
+    </div>
+    <div data-filter="specialist" class="specialist-table">
       <table>
         <thead>
             <tr>
-              <th> </th>
+              <th class="empty-th"> </th>
               <th>Garment type:</th>
               <th>Number of pieces:</th>
               <th>Sizes</th>
@@ -193,8 +206,9 @@
         </thead>
         <tbody data-bind="foreach: specPricingList">
             <tr>
-                <td><form><button data-bind="click: $parent.addSpecGarment">+</button></td>
-                <td data-bind="text: name"></td>
+                <td><i data-bind="click: $parent.addSpecGarment" class="fas fa-plus" id="plus-minus"></i>
+                  <i data-bind="click: $parent.removeSpecGarment" class="fas fa-minus" id="plus-minus"></i></td>
+                  <td data-bind="text: name"></td>
                 <td><select data-bind="options: quantity, value: quantityValue"></select></td>
                 <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
                 <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
@@ -208,6 +222,7 @@
     <div class="final-price">
       <h4>Final Price:</h4><span>£</span><span data-bind="text: specFinalPrice"></span>
     </div>
+    <div class="space"></div>
   </div>
     </div>
     </div>

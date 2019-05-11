@@ -5,28 +5,28 @@
     var pricingTypes = [
         {
             id: 0,
-            name: "Trousers, shorts and skirts:",
+            name: "Trouser, short or skirt:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 7.5, 9.5, 11.5, 11.5, 11.5 ],
             plot: false,
         },
         {   
             id:  1,
-            name: "Blousers, tops and shirts:",
+            name: "Blouser, top or shirt:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 7.5, 9.5, 13, 13, 13 ],
             plot: false,
         },
         {   
             id: 2,
-            name: "Dresses and playsuits:",
+            name: "Dress or playsuit:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 9, 12, 14.85, 18.50, 22.50 ],
             plot: false,
         },
         {   
             id: 3,
-            name: "Jackets and Coats:",
+            name: "Jacket or Coat:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 9.5, 12.5, 16, 24, 22.5 ],
             plot: false,
@@ -34,25 +34,25 @@
     ]
     var specPricingTypes = [
         {
-            name: "Trousers, shorts and skirts:",
+            name: "Trouser, short or skirt:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 8.5, 11.5, 13.5, 13.5, 13.5 ],
             plot: false,
         },
         {
-            name: "Blousers, tops and shirts:",
+            name: "Blouser, top or shirt:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18'],
             price : [ 8.5, 11.5, 15, 15, 15 ],
             plot: false,
         },
         {
-            name: "Dresses and playsuits:",
+            name: "Dress or playsuit:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 10.5, 13, 15.5, 21.5, 24.5 ],
             plot: false,
         },
         {
-            name: "Jackets and Coats:",
+            name: "Jacket or Coat:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 11, 13.5, 17, 27, 25 ],
             plot: false,
@@ -235,7 +235,7 @@ var ViewModel = function() {
             price = price + self.specPricingList()[i].price()
         }{return price}
     });
-    // Button functions adding items to the pricing lists
+    // Button functions adding/removing items to the pricing lists
     self.addGarment = function(data) {
         console.log(data)
         self.pricingList.push(data)
@@ -247,6 +247,31 @@ var ViewModel = function() {
         self.specPricingList.push(data)
         console.log(self.specPricingList())
 
+    }
+    self.removeGarment = function(data) {
+        console.log(data)
+        self.pricingList.pop()
+        console.log(self.pricingList())
+
+    }
+    self.removeSpecGarment = function(data) {
+        console.log(data)
+        self.specPricingList.pop()
+        console.log(self.specPricingList())
+
+    }
+    // Hide/show tables function
+    self.filterTables = function(data, event) {
+        var item = $(event.currentTarget)
+        console.log(item)
+        var str = "."+item.attr("class")+"-table";
+        console.log(str)
+            if (str === ".StandardGrading") {}
+
+        $(str).slideToggle()
+        if(item.html() === "Hide"){
+            item.html("Show")
+        } else {item.html("Hide")}
     }
 }
 ko.applyBindings(new ViewModel());
