@@ -59,7 +59,7 @@
         }
     ]
   /* ==============================================
-    Price Data constructor
+    Price Data constructors
     ================================================ */
 
 
@@ -269,9 +269,185 @@ var ViewModel = function() {
             if (str === ".StandardGrading") {}
 
         $(str).slideToggle()
-        if(item.html() === "Hide"){
-            item.html("Show")
-        } else {item.html("Hide")}
+        if(item.html() === '<i class="fas fa-arrow-circle-up"></i>'){
+            item.html('<i class="fas fa-arrow-circle-down"></i>')
+        } else {item.html('<i class="fas fa-arrow-circle-up"></i>')}
+    }
+
+
+
+  	/*====================================
+    Export to PDF functions
+    ======================================*/
+    self.exportPDF = function() {
+    $(".toHide").toggle();
+    $(".formattedSelect").toggle();
+    $(".rawSelect").toggle();
+    $("td").css("padding", "0px");
+    $("td").css("font-size", "18px");
+    var vat = self.finalPrice() * 0.2;
+    vat = vat.toFixed(2);
+    var final = self.finalPrice() + vat
+    final = final.toFixed(2);
+
+    
+    html2canvas($('#stdTable'), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var logo
+
+        var docDefinition = {
+            content: [
+              { text: 'Grainline studio', style: 'header' },
+              { text: 'Grading Invoice', style: 'h2' },
+              { text: '20-24 Assembly Passage', style: 'rightSide' },
+              { text: 'London', style: 'rightSide' },
+              { text: 'E1 4UT', style: 'rightSide' },
+              { text: 'info@grainlinestudio.co.uk', style: 'rightSide' },
+              { text: '+44 2077908395', style: 'rightSide, bottom' },
+              { image: data, width: 500 },
+              { text: 'Price: £'+self.finalPrice(), style: 'rightSide' },
+              { text: 'VAT 20%: £'+vat, style: 'rightSide'},
+              { text: 'Total: £' + final + '*', style: 'rightSide'},
+              { text: '* Please note this invoice may be subject to change depending on the patterns', style: 'desclaimer' },
+              { text: 'Contact info@grainlinestudio.co.uk for more details', style: 'desclaimer' },
+              
+            ],
+          
+            styles: {
+              header: {
+                fontSize: 22,
+                bold: true
+              },
+              rightSide: {
+                alignment: 'right'
+              },
+              bottom: {
+                  alignment: 'bottom'
+              },
+              desclaimer: {
+                fontSize: 7
+              }
+            }
+          };
+    
+          pdfMake.createPdf(docDefinition).download("Table.pdf");
+        }
+    });
+}
+self.exportSpecPDF = function() {
+    $(".toHide").toggle();
+    $(".formattedSelect").toggle();
+    $(".rawSelect").toggle();
+    $("td").css("padding", "0px");
+    $("td").css("font-size", "18px");
+    var vat = self.specFinalPrice() * 0.2;
+    vat = vat.toFixed(2);
+    var final = self.specFinalPrice() + vat
+    final = final.toFixed(2);
+
+    
+    html2canvas($('#spcTable'), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var logo
+
+        var docDefinition = {
+            content: [
+              { text: 'Grainline studio', style: 'header' },
+              { text: 'Grading Invoice', style: 'h2' },
+              { text: '20-24 Assembly Passage', style: 'rightSide' },
+              { text: 'London', style: 'rightSide' },
+              { text: 'E1 4UT', style: 'rightSide' },
+              { text: 'info@grainlinestudio.co.uk', style: 'rightSide' },
+              { text: '+44 2077908395', style: 'rightSide' },
+              { image: data, width: 500 },
+              { text: 'Price: £'+self.specFinalPrice(), style: 'rightSide' },
+              { text: 'VAT 20%: £'+vat, style: 'rightSide'},
+              { text: 'Total: £' + final + '*', style: 'rightSide'},
+              { text: '* Please note this invoice may be subject to change depending on the patterns', style: 'desclaimer' },
+              { text: 'Contact info@grainlinestudio.co.uk for more details', style: 'desclaimer' },
+              
+            ],
+          
+            styles: {
+              header: {
+                fontSize: 22,
+                bold: true
+              },
+              h2: {
+                fontSize: 19,
+              },
+              rightSide: {
+                alignment: 'right'
+              },
+              desclaimer: {
+                fontSize: 10
+              }
+            }
+          };
+    
+          pdfMake.createPdf(docDefinition).download("Table.pdf");
+        }
+    });
+}
+
+
+
+}
+
+ko.applyBindings(new ViewModel());
+
+  	/*====================================
+    Export to Excell function
+    ======================================*/
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.pdf':'excel_data.xls';
+        
+    // Create download link element
+    downloadLink = document.createElement("a");
+        
+    document.body.appendChild(downloadLink);
+        
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        
+        // Setting the file name
+        downloadLink.download = filename;
+            
+        //triggering the function
+        downloadLink.click();
     }
 }
-ko.applyBindings(new ViewModel());
+  	/*====================================
+    Export screencap to PDF function
+    ======================================*/
+function Export() {
+    html2canvas($('#stdTable'), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500
+                }]
+            };
+            pdfMake.createPdf(docDefinition).download("Table.pdf");
+        }
+    });
+}
+
+
+          

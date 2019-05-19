@@ -148,16 +148,16 @@
         <div class="table-title">
           <h4>Standard pricing table<span>
               <div class="type">
-                <a class="standard" href="#" data-bind="click: filterTables" data-filter="standard">Hide</a>
+                <a id="arrow" class="standard" href="#" data-bind="click: filterTables" data-filter="standard"><i class="fas fa-arrow-circle-up"></i></a>
               </div>
             </span></h4>
           </div>
       <div data-filter="standard" class="standard-table">
-      <table>
+      <table id="stdTable">
           <thead>
               <tr>
-                <th> </th>
-                <th>Garment type:</th>
+                <th class="toHide"> </th>
+                <th class="secondTH">Garment type:</th>
                 <th>Number of pieces:</th>
                 <th>Sizes:</th>
                 <th>Plot and cut on card?</th>
@@ -166,12 +166,12 @@
           </thead>
           <tbody data-bind="foreach: pricingList">
               <tr>
-                <td><i data-bind="click: $parent.addGarment" class="fas fa-plus" id="plus-minus"></i>
+                <td class="toHide"><i data-bind="click: $parent.addGarment" class="fas fa-plus" id="plus-minus"></i>
                   <i data-bind="click: $parent.removeGarment" class="fas fa-minus" id="plus-minus"></i></td>
                   <td data-bind="text: name"></td>
-                  <td><select data-bind="options: quantity, value: quantityValue"></select></td>
-                  <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
-                  <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
+                  <td class="TDpieceNo"><select class="formattedSelect" data-bind="options: quantity, value: quantityValue"></select><span class="rawSelect" data-bind="text: quantityValue" style="display: none"></span></td>
+                  <td><input class="formattedSelect" value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"><span class="rawSelect" data-bind="text: sizes" style="display: none"></span></td>
+                  <td><select class="formattedSelect" data-bind="options: plotOptions, value: plotValue"></select><span class="rawSelect" data-bind="text: plotValue" style="display: none"></span></td>
                   <td>Price:
                     <span>£</span><span data-bind="text: price"></span>
                     (per piece:
@@ -180,23 +180,24 @@
           </tbody>
       </table>
       <div class="final-price">
-        <h4>Final Price:</h4><span>£</span><span data-bind="text: finalPrice"></span>
+        <h4>Total:</h4><span>£</span><span data-bind="text: finalPrice"></span>
       </div>
+      <button data-bind="click: exportPDF">Export to PDF</button>
       <div class="space"></div>
     </div>
     <div class="space"></div>
     <div class="table-title">
       <h4>Specialist pricing table<span>
         <div class="type">
-          <a class="specialist" href="#" data-bind="click: filterTables" data-filter="standard">Hide</a>
+          <a id="arrow" class="specialist" href="#" data-bind="click: filterTables" data-filter="standard"><i class="fas fa-arrow-circle-up"></i></a>
         </div>
       </span></h3>
     </div>
     <div data-filter="specialist" class="specialist-table">
-      <table>
+      <table id="spcTable">
         <thead>
             <tr>
-              <th class="empty-th"> </th>
+              <th class="toHide"> </th>
               <th>Garment type:</th>
               <th>Number of pieces:</th>
               <th>Sizes</th>
@@ -206,12 +207,12 @@
         </thead>
         <tbody data-bind="foreach: specPricingList">
             <tr>
-                <td><i data-bind="click: $parent.addSpecGarment" class="fas fa-plus" id="plus-minus"></i>
+                <td class="toHide"><i data-bind="click: $parent.addSpecGarment" class="fas fa-plus" id="plus-minus"></i>
                   <i data-bind="click: $parent.removeSpecGarment" class="fas fa-minus" id="plus-minus"></i></td>
                   <td data-bind="text: name"></td>
-                <td><select data-bind="options: quantity, value: quantityValue"></select></td>
-                <td><input value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"></td>
-                <td><select data-bind="options: plotOptions, value: plotValue"></select></td>
+                <td><select class="formattedSelect" data-bind="options: quantity, value: quantityValue"></select><span class="rawSelect" data-bind="text: quantityValue" style="display: none"></span></td>
+                <td><input class="formattedSelect" value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"><span class="rawSelect" data-bind="text: sizes" style="display: none"></span></td>
+                <td><select class="formattedSelect" data-bind="options: plotOptions, value: plotValue"></select><span class="rawSelect" data-bind="text: plotValue" style="display: none"></span></td>
                 <td>Price:
                   <span>£</span><span data-bind="text: price"></span>
                   (per piece:
@@ -220,8 +221,9 @@
         </tbody>
     </table>
     <div class="final-price">
-      <h4>Final Price:</h4><span>£</span><span data-bind="text: specFinalPrice"></span>
+      <h4>Total:</h4><span>£</span><span data-bind="text: specFinalPrice"></span>
     </div>
+    <button data-bind="click: exportSpecPDF">Export to PDF</button>
     <div class="space"></div>
   </div>
     </div>
@@ -295,15 +297,21 @@
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.1.11.1.js"></script> 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="/app/js/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script> 
 <script type="text/javascript" src="js/SmoothScroll.js"></script> 
 <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script> 
 <script type="text/javascript" src="js/jquery.isotope.js"></script> 
 <script type="text/javascript" src="js/jqBootstrapValidation.js"></script> 
 <script type="text/javascript" src="js/contact_me.js"></script>
+<!-- pdfmake dependancies -->
+<script src='js/pdfmake.min.js'></script>
+<script src='js/vfs_fonts.js'></script>
 
 <script type='text/javascript' src='js/knockout-3.5.0.js'></script>
 <!-- Javascripts

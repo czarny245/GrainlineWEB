@@ -349,6 +349,12 @@ ol.type li a:hover {
 	font-size: 15px;
 	color: #ffab2e;
 }
+#arrow {
+	transition: 0.2s;
+}
+#arrow:hover {
+	color: #ffab2e;
+}
 .table-title {
 	padding: 10px;
 	margin-top: 100px;
@@ -381,6 +387,19 @@ th {
 }
 td {
 	padding: 10px;
+	padding-bottom: 40px;
+}
+.formattedSelect {
+	margin-left: 30%;
+}
+th {
+	padding-left: 50px;
+}
+.secondTH {
+	padding-left: 20px;
+}
+tr:first-child td{
+	padding-top: 30px;
 }
 .standard {
 	display: block;
@@ -551,6 +570,14 @@ table, tbody {
 		border: none;
 		border-bottom: 1px solid #eee; 
 		position: relative;
+		padding:0px;
+		font-size: 18px;
+	}
+	.toHide {
+		display: none;
+	}
+	tr:first-child td{
+		padding-top: 0px;
 	}
 	
 	td:before { 
