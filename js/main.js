@@ -82,7 +82,14 @@
             else if (self.quantityValue() === "31 to 40"){return data.price[4]}
         });
         self.pricePP = ko.computed(function() {
-            if (self.plotValue() === "Yes"){return self.initialPricePP() + 4}
+            if (self.quantityValue() === 0){return 0}
+            else if (self.plotValue() === "Yes"){
+                if (self.quantityValue() === "1 to 6"){return self.initialPricePP() + 5}
+                else if (self.quantityValue() === "7 to 11"){return self.initialPricePP() + 6}
+                else if (self.quantityValue() === "12 to 18"){return self.initialPricePP() + 7}
+                else if (self.quantityValue() === "19 to 30"){return self.initialPricePP() + 7.5}
+                else if (self.quantityValue() === "31 to 40"){return self.initialPricePP() + 9}
+            }
             else {return self.initialPricePP()}
         });
         self.plotOptions = ko.observableArray(['No', 'Yes']);
@@ -108,7 +115,14 @@
             else if (self.quantityValue() === "31 to 40"){return data.price[4]}
         });
         self.pricePP = ko.computed(function() {
-            if (self.plotValue() === "Yes"){return self.initialPricePP() + 4}
+            if (self.quantityValue() === 0){return 0}
+            else if (self.plotValue() === "Yes"){
+                if (self.quantityValue() === "1 to 6"){return self.initialPricePP() + 5}
+                else if (self.quantityValue() === "7 to 11"){return self.initialPricePP() + 6}
+                else if (self.quantityValue() === "12 to 18"){return self.initialPricePP() + 7}
+                else if (self.quantityValue() === "19 to 30"){return self.initialPricePP() + 7.5}
+                else if (self.quantityValue() === "31 to 40"){return self.initialPricePP() + 9}
+            }
             else {return self.initialPricePP()}
         });
         self.plotOptions = ko.observableArray(['No', 'Yes']);
@@ -274,8 +288,6 @@ var ViewModel = function() {
         } else {item.html('<i class="fas fa-arrow-circle-up"></i>')}
     }
 
-
-
   	/*====================================
     Export to PDF functions
     ======================================*/
@@ -285,10 +297,17 @@ var ViewModel = function() {
     $(".rawSelect").toggle();
     $("td").css("padding", "0px");
     $("td").css("font-size", "18px");
+
     var vat = self.finalPrice() * 0.2;
-    vat = vat.toFixed(2);
     var final = self.finalPrice() + vat
+    vat = vat.toFixed(2);
     final = final.toFixed(2);
+
+    var dt = new Date();
+    var utcDate = dt.toUTCString();
+ 
+    //Print results
+    console.log(utcDate);
 
     
     html2canvas($('#stdTable'), {
@@ -304,29 +323,31 @@ var ViewModel = function() {
               { text: 'London', style: 'rightSide' },
               { text: 'E1 4UT', style: 'rightSide' },
               { text: 'info@grainlinestudio.co.uk', style: 'rightSide' },
-              { text: '+44 2077908395', style: 'rightSide, bottom' },
-              { image: data, width: 500 },
+              { text: '+44 2077908395', style: 'rightSide' },
+              { text: utcDate, style:'margin' },
+              { image: data, width: 500, margin:[5,5,5,30]},
               { text: 'Price: £'+self.finalPrice(), style: 'rightSide' },
               { text: 'VAT 20%: £'+vat, style: 'rightSide'},
-              { text: 'Total: £' + final + '*', style: 'rightSide'},
-              { text: '* Please note this invoice may be subject to change depending on the patterns', style: 'desclaimer' },
-              { text: 'Contact info@grainlinestudio.co.uk for more details', style: 'desclaimer' },
-              
+              { text: 'Total: £' + final + '*', style: 'rightSide', margin:[5,5,5,40]},
+              { text: '* Please note this invoice may be subject to change depending on the patterns', style: 'bottom', margin:[5,40,5,5] },
+              { text: 'Contact info@grainlinestudio.co.uk for more details', style: 'bottom' },
             ],
           
             styles: {
               header: {
                 fontSize: 22,
-                bold: true
+                bold: true,
+                margin: [5, 20, 5, 20]
               },
               rightSide: {
                 alignment: 'right'
               },
               bottom: {
-                  alignment: 'bottom'
+                fontSize: 8,
+                alignment: 'centre'
               },
-              desclaimer: {
-                fontSize: 7
+              margin: {
+                  margin: [5, 20, 5, 20]
               }
             }
           };
@@ -341,10 +362,17 @@ self.exportSpecPDF = function() {
     $(".rawSelect").toggle();
     $("td").css("padding", "0px");
     $("td").css("font-size", "18px");
+
     var vat = self.specFinalPrice() * 0.2;
-    vat = vat.toFixed(2);
     var final = self.specFinalPrice() + vat
+    vat = vat.toFixed(2);
     final = final.toFixed(2);
+
+    var dt = new Date();
+    var utcDate = dt.toUTCString();
+ 
+    //Print results
+    console.log(utcDate);
 
     
     html2canvas($('#spcTable'), {
@@ -354,37 +382,39 @@ self.exportSpecPDF = function() {
 
         var docDefinition = {
             content: [
-              { text: 'Grainline studio', style: 'header' },
-              { text: 'Grading Invoice', style: 'h2' },
-              { text: '20-24 Assembly Passage', style: 'rightSide' },
-              { text: 'London', style: 'rightSide' },
-              { text: 'E1 4UT', style: 'rightSide' },
-              { text: 'info@grainlinestudio.co.uk', style: 'rightSide' },
-              { text: '+44 2077908395', style: 'rightSide' },
-              { image: data, width: 500 },
-              { text: 'Price: £'+self.specFinalPrice(), style: 'rightSide' },
-              { text: 'VAT 20%: £'+vat, style: 'rightSide'},
-              { text: 'Total: £' + final + '*', style: 'rightSide'},
-              { text: '* Please note this invoice may be subject to change depending on the patterns', style: 'desclaimer' },
-              { text: 'Contact info@grainlinestudio.co.uk for more details', style: 'desclaimer' },
-              
-            ],
+                { text: 'Grainline studio', style: 'header' },
+                { text: 'Grading Invoice', style: 'h2' },
+                { text: '20-24 Assembly Passage', style: 'rightSide' },
+                { text: 'London', style: 'rightSide' },
+                { text: 'E1 4UT', style: 'rightSide' },
+                { text: 'info@grainlinestudio.co.uk', style: 'rightSide' },
+                { text: '+44 2077908395', style: 'rightSide' },
+                { text: utcDate, style:'margin' },
+                { image: data, width: 500, margin:[5,5,5,30]},
+                { text: 'Price: £'+self.specFinalPrice(), style: 'rightSide' },
+                { text: 'VAT 20%: £'+vat, style: 'rightSide'},
+                { text: 'Total: £' + final + '*', style: 'rightSide', margin:[5,5,5,40]},
+                { text: '* Please note this invoice may be subject to change depending on the patterns', style: 'bottom', margin:[5,40,5,5] },
+                { text: 'Contact info@grainlinestudio.co.uk for more details', style: 'bottom' },
+              ],
           
-            styles: {
-              header: {
-                fontSize: 22,
-                bold: true
-              },
-              h2: {
-                fontSize: 19,
-              },
-              rightSide: {
-                alignment: 'right'
-              },
-              desclaimer: {
-                fontSize: 10
+              styles: {
+                header: {
+                  fontSize: 22,
+                  bold: true,
+                  margin: [5, 20, 5, 20]
+                },
+                rightSide: {
+                  alignment: 'right'
+                },
+                bottom: {
+                  fontSize: 8,
+                  alignment: 'centre'
+                },
+                margin: {
+                    margin: [5, 20, 5, 20]
+                }
               }
-            }
           };
     
           pdfMake.createPdf(docDefinition).download("Table.pdf");
