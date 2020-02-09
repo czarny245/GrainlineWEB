@@ -26,7 +26,7 @@
         },
         {   
             id: 3,
-            name: "Jacket or Coat:",
+            name: "Jacket or coat:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 9.5, 12.5, 16, 24, 22.5 ],
             plot: false,
@@ -52,7 +52,7 @@
             plot: false,
         },
         {
-            name: "Jacket or Coat:",
+            name: "Jacket or coat:",
             quantity: [0, '1 to 6', '7 to 11', '12 to 18', '19 to 30', '31 to 40'],
             price: [ 11, 13.5, 17, 27, 25 ],
             plot: false,
@@ -83,16 +83,15 @@
         });
         self.pricePP = ko.computed(function() {
             if (self.quantityValue() === 0){return 0}
-            else if (self.plotValue() === "Yes"){
-                if (self.quantityValue() === "1 to 6"){return self.initialPricePP() + 5}
-                else if (self.quantityValue() === "7 to 11"){return self.initialPricePP() + 6}
-                else if (self.quantityValue() === "12 to 18"){return self.initialPricePP() + 7}
-                else if (self.quantityValue() === "19 to 30"){return self.initialPricePP() + 7.5}
-                else if (self.quantityValue() === "31 to 40"){return self.initialPricePP() + 9}
+            else if (self.plotValue() === "Paper"){
+                {return self.initialPricePP() + 5}
+            }
+            else if (self.plotValue() === "Card"){
+                {return self.initialPricePP() + 9}
             }
             else {return self.initialPricePP()}
         });
-        self.plotOptions = ko.observableArray(['No', 'Yes']);
+        self.plotOptions = ko.observableArray(['No','Paper','Card']);
         self.price = ko.computed(function() {
             return self.pricePP() * self.sizes()
         });
@@ -116,16 +115,15 @@
         });
         self.pricePP = ko.computed(function() {
             if (self.quantityValue() === 0){return 0}
-            else if (self.plotValue() === "Yes"){
-                if (self.quantityValue() === "1 to 6"){return self.initialPricePP() + 5}
-                else if (self.quantityValue() === "7 to 11"){return self.initialPricePP() + 6}
-                else if (self.quantityValue() === "12 to 18"){return self.initialPricePP() + 7}
-                else if (self.quantityValue() === "19 to 30"){return self.initialPricePP() + 7.5}
-                else if (self.quantityValue() === "31 to 40"){return self.initialPricePP() + 9}
+            else if (self.plotValue() === "Paper"){
+                {return self.initialPricePP() + 5}
+            }
+            else if (self.plotValue() === "Card"){
+                {return self.initialPricePP() + 5}
             }
             else {return self.initialPricePP()}
         });
-        self.plotOptions = ko.observableArray(['No', 'Yes']);
+        self.plotOptions = ko.observableArray(['No','Paper','Card']);
         self.price = ko.computed(function() {
             return self.pricePP() * self.sizes()
         });

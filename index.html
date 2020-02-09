@@ -6,6 +6,7 @@
 <title>Grainline Studio</title>
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="google-site-verification" content="bzgdWCKPfLZMJE2tHEUNRZYsM0xsvhp9syKDm4Aww-E" />
 
 <!-- Favicons
     ================================================== -->
@@ -172,18 +173,24 @@
                   <td class="TDpieceNo"><select class="formattedSelect" data-bind="options: quantity, value: quantityValue"></select><span class="rawSelect" data-bind="text: quantityValue" style="display: none"></span></td>
                   <td><input class="formattedSelect" value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"><span class="rawSelect" data-bind="text: sizes" style="display: none"></span></td>
                   <td><select class="formattedSelect" data-bind="options: plotOptions, value: plotValue"></select><span class="rawSelect" data-bind="text: plotValue" style="display: none"></span></td>
-                  <td>Price:
+                  <td class = "price-column">Price:
                     <span>£</span><span data-bind="text: price"></span>
                     (per piece:
                     <span>£</span><span data-bind="text: pricePP"></span>)</td>
               </tr>
           </tbody>
       </table>
-      <div class="final-price">
+      <div class="bottom-table">
+        <div class="final-price">
         <h4>Total:</h4><span>£</span><span data-bind="text: finalPrice"></span>
+        </div>
+        <div class="exportButtonContainer">
+          <i class="fas fa-file-pdf"></i>
+          <button class="exportbttn" data-bind="click: exportPDF">Export to PDF</button>
+        </div>
+        <h5 class="discount">10% Student Discount</h5>
+        <div class="space"></div>
       </div>
-      <button data-bind="click: exportPDF">Export to PDF</button>
-      <div class="space"></div>
     </div>
     <div class="space"></div>
     <div class="table-title">
@@ -213,18 +220,24 @@
                 <td><select class="formattedSelect" data-bind="options: quantity, value: quantityValue"></select><span class="rawSelect" data-bind="text: quantityValue" style="display: none"></span></td>
                 <td><input class="formattedSelect" value= "4" type="number" name="quantity" min="4" max="10" step="1" data-bind="value: sizes"><span class="rawSelect" data-bind="text: sizes" style="display: none"></span></td>
                 <td><select class="formattedSelect" data-bind="options: plotOptions, value: plotValue"></select><span class="rawSelect" data-bind="text: plotValue" style="display: none"></span></td>
-                <td>Price:
+                <td class = "price-column" >Price:
                   <span>£</span><span data-bind="text: price"></span>
                   (per piece:
                   <span>£</span><span data-bind="text: pricePP"></span>)</td>
             </tr>
         </tbody>
     </table>
-    <div class="final-price">
-      <h4>Total:</h4><span>£</span><span data-bind="text: specFinalPrice"></span>
+    <div class="bottom-table">
+      <div class="final-price">
+        <h4>Total:</h4><span>£</span><span data-bind="text: specFinalPrice"></span>
+      </div>
+      <div class="exportButtonContainer">
+        <i class="fas fa-file-pdf"></i>
+        <button class="exportbttn" data-bind="click: exportSpecPDF">Export to PDF</button>
+      </div>
+      <h5 class="discount">10% Student Discount</h5>
+      <div class="space"></div>
     </div>
-    <button data-bind="click: exportSpecPDF">Export to PDF</button>
-    <div class="space"></div>
   </div>
     </div>
     </div>
@@ -240,8 +253,11 @@
       <h2>Contact Us</h2>
       <hr>
     </div>
+    <div class="col-md-12">
+      <div id="map"></div>
+  </div>
     <div class="col-md-4">
-      <h4>Contact info</h4>
+      <div class="space"></div>
       <div class="space"></div>
       <p><i class="fa fa-map-marker"></i>20-24 Assembly Passage <br>
         London, E1 4UT</p>
@@ -250,11 +266,12 @@
       <div class="space"></div>
       <p><i class="fa fa-phone"></i>+44 2077908395</p>
     </div>
+
     <div class="col-md-8">
-      <h4>Leave us a message</h4>
       <form name="sentMessage" id="contactForm" novalidate>
         <div class="row">
           <div class="col-md-6">
+            <div class="space"></div>
             <div class="form-group">
               <input type="text" id="name" class="form-control" placeholder="Name" required="required">
               <p class="help-block text-danger"></p>
@@ -262,6 +279,7 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
+              <div class="space"></div>
               <input type="email" id="email" class="form-control" placeholder="Email" required="required">
               <p class="help-block text-danger"></p>
             </div>
@@ -292,7 +310,9 @@
   <div class="container">
   </div>
 </div>
-
+<script type="text/javascript" src="js/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7likgcoX5b8brp3pW3y2HvtHblgoqLmM&callback=initMap"
+    async defer></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.1.11.1.js"></script> 

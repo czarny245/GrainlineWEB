@@ -24,6 +24,7 @@ h3 {
 h4 {
 	color: #666;
 	font-size: 20px;
+	font-weight: bold;
 }
 h5 {
 	text-transform: uppercase;
@@ -122,7 +123,7 @@ hr {
 }
 /* Home Style */
 header {
-	background: url(../img/Background11.jpg) no-repeat top center;
+	background: url(../img/Background11-large.jpg) no-repeat top center;
 	background-size: cover;
 	color: #cfcfcf;
 	position: relative;
@@ -338,8 +339,12 @@ ol.type li a:hover {
 	opacity: 1;
 }
 /* Pricing Section */
+.price-column {
+	width: 300px;
+}
 .final-price {
 	float: right;
+	padding-right: 100px;
 }
 #plus-minus {
 	font-size: 15px;
@@ -359,10 +364,14 @@ ol.type li a:hover {
 	padding: 10px;
 	margin-top: 100px;
 }
+.standard-table {
+	box-shadow: rgb(136, 136, 136) 5px 10px 8px;
+}
+.specialist-table {
+	box-shadow: rgb(136, 136, 136) 5px 10px 8px;
+}
 table {
 	padding: 20px;
-	box-shadow: rgb(136, 136, 136) 5px 10px 8px;
-	margin: 25px auto;
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0; 
@@ -407,6 +416,26 @@ tr:first-child td{
 .specialist {
 	display: block;
 }
+.discount {
+	margin-top: 10px;
+	margin-left: 35px;
+}
+.bottom-table {
+background-color: #CECFCF;
+padding: 5px;
+}
+.exportButtonContainer i {
+	font-size: 30px;
+}
+.exportButtonContainer  {
+	margin-left:20px;
+	width: 200px;
+	transition: 0.3s;
+}
+.exportButtonContainer:hover {
+	color: #ffab2e;
+}
+
 
 /* Contact Section */
 #contact-section {
@@ -475,6 +504,11 @@ label {
 a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
 	outline: none;
 	outline-offset: none;
+}
+/* Map section */
+#map {
+	height: 300px;
+	box-shadow: rgb(136, 136, 136) 5px 10px 8px;
 }
 /* Social Section */
 #social-section {
